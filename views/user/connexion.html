@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      
+        <title>Connexion</title>
+    </head>
+  
+    <body>
+      <br>
+        <h1 style="text-align:center"> Connexion </h1>
+      <br>
+      <br>
+      <br>
+      <br>
+    <form id = "connexionForm" class ="">
+  
+      <div class = "container">
+       <div class = "row">
+         <div class = "col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+           
+        <div class = form-group>
+          <label for = "identifiant">Identifiant :</label>
+          <input class = form-control type = "text" id="identifiant" name="identifiant" placeholder = "Identifiant" required>
+        </div>
+      
+         <div class = form-group>
+          <label for = "motDePasse">Mot de passe :</label>
+          <input class = "form-control" type = "password" id = "motDePasse" name = "motDePasse" placeholder = "Mot de passe" required>
+         </div>
+
+         <div id="infosFalse" class="hidden" style="text-align:center"></div>
+          <br>
+         <div>
+          <button type="button" id="connexionButton" class="btn btn-secondary btn btn-block">Se connecter</button> <!--la class du button permet de le caler sur la largeur des parents, ici les input mdp et identifiant -->
+         </div>
+         </div>
+        </div>
+      </div>
+         
+      </form>
+
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>
+                
+              $("#connexionButton").click(function() {
+                var identifiant = $("#identifiant").val();
+                var motDePasse = $("#motDePasse").val();       
+                var data=JSON.stringify({
+                    identifiant: identifiant,
+                    motDePasse: motDePasse
+                  });
+                
+              $.ajax ({
+                  url : "{{ path }}?c=user&t=connexionValid",
+                  type : "POST", 
+                  dataType: "json",
+                  contentType: 'application/json',
+                  data : data,
+                  success : function(success) {
+//                     console.log(response)
+//                     console.log('success');
+                    console.log(success.status)
+//                     const status = JSON.parse(success.responseText); // const = var / const = let / parse equivalent a un decode
+//                     $("#infosFalse").html(status.message); // methode html remplace le contenu de l'element selectionné par l'id
+//                     $( "#infosFalse" ).css( 'display', "block" ); // affiche la div #infosFalse
+//                     console.log(status.code);  
+                      document.location.href="{{ path }}?c=competence&t=list"; 
+                  },
+                  error : function(error) { // la parametre de la fonction correspond au nom de la reponse qu'il recoit
+                    console.log(error)
+                    const newError = JSON.parse(error.responseText); // const = var / const = let / parse equivalent a un decode
+                    $("#infosFalse").html(newError.message); // methode html remplace le contenu de l'element selectionné par l'id
+                    $( "#infosFalse" ).css( 'display', "block" ); // affiche la div #infosFalse
+                    $( "#from" ).toggleClass( 'was-validated' ); // ajoute ou supprime la class indiquée // METTRE FORM AU LIEU DE FROM QUAND JE REESSAYERAIS LA FONCTION EN QUESTION
+
+                    console.log(newError.status);
+                    
+                  },
+               });
+      })
+        
+        
+        
+        
+        
+        
+        
+      </script>
+     </body>
+</html>

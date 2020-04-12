@@ -1,0 +1,41 @@
+/* table {
+    vertical-align: none;
+  }
+
+td {
+    vertical-align: none;
+  } */
+
+.table td, .table th {
+    vertical-align: unset!important;
+  }
+
+#retourButton.btn-outline-secondary:hover, .btn-outline-secondary:focus, .btn-outline-secondary:active, .btn-outline-secondary.active, .open>.dropdown-toggle.btn-outline-secondary {
+    color: #fdfdfd!important;
+    background-color: #6c757d!important;
+    border-color: #6c757d!important;
+}
+
+#retourButton {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+@media (max-width: 576px) { 
+  
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+}
+
+@media (min-width: 576px) {
+  
+ #selectRole {
+ word-wrap: break-word;
+ min-width: 200px; 
+ max-width: 100%;
+}

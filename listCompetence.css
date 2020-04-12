@@ -1,0 +1,97 @@
+#td_tache_description2 {
+  border: none;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+#titreTache {
+  color: #000000;
+  text-decoration: none;
+}
+
+#newTache {
+  padding-left: 0;
+}
+
+#editTache {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+#deleteTache {
+  padding-right: 0;
+}
+
+.table-responsive {
+  vertical-align: middle;
+}
+
+.table {
+  margin-bottom: 0px;
+}
+
+#td_tache_delete2 {
+  padding-bottom: 1px;
+}
+
+#td_tache_delete3 {
+  border: none;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+#td_tache_description2 {
+  word-wrap: break-word;
+  min-width: 250px;
+  max-width: 250px;
+}
+
+#panelAdminCss {
+  width: 100%;
+}
+
+#decoBouttonCss {
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  .add-flex {
+    width: 100%;
+  }
+  .half_width {
+    flex: 1;
+  }
+  #panelAdminLink {
+    width: 100%;
+  }
+  #deconnexionButton {
+    width: 100%;
+  }
+  #td_tache_description2 {
+    word-wrap: break-word;
+    min-width: 100px;
+    max-width: 100px;
+  }
+  #code {
+    word-wrap: break-word;
+    min-width: 60px;
+    max-width: 60px;
+  }
+}
+
+@media (min-width: 576px) {
+  #editCompetence {
+    word-wrap: break-word;
+    min-width: 60px;
+    max-width: 60px;
+  }
+  
+  #deleteCompetence {
+    word-wrap: break-word;
+    min-width: 60px;
+    max-width: 60px;
+  }
+    
+}

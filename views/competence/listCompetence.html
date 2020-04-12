@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://kit.fontawesome.com/1804e69ab6.js" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Liste des competences</title>
+  <link href='listCompetence.css' type='text/css' rel='stylesheet' />
+</head>
+
+<body>
+  <br>
+  <div class="container-fluid">
+  <div class=row>
+    <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
+        <h2 style="text-align:center">Tableau de competences</h2>
+    </div>
+  </div>
+  </div>
+  <br>
+      
+    <div class=container-fluid>
+     <div class="d-sm-flex flex-row"><!-- flex = se mettre a la suite -->
+      <div class="mr-auto p-2" id="addCompetenceCss">
+        <a href="{{ path }}?c=competence&t=new" class="btn btn-secondary stretched-link add-flex"> AJOUTER UNE COMPETENCE </a>
+      </div>
+
+      <div class="d-flex flex-row">
+          {% if user.role == "admin" %}
+        <div class="p-2 half_width" id="panelAdminCss">
+          <a href="{{ path }}?c=admin&t=index" class="btn btn-secondary stretched-link" id="panelAdminLink"> PANEL ADMIN </a> 
+        </div>
+          {% endif %}
+
+        <div class="p-2 half_width" id="decoBouttonCss">
+          <button type="button" id="deconnexionButton" class="btn btn-danger">Se deconnecter</button>
+        </div>
+      </div>
+    </div>
+   </div>
+
+  <div class=container-fluid>
+    <div class="table-responsive">
+      <table class='table table-borderless'>
+        <div class="row">
+
+          <thead class="thead-light">
+            <tr>
+              <div class="col-xl-3">
+                <th colspan="2" style="text-align:center"> Competences </th>
+                <!-- colspan sert a choisir combien de largeur (de colonnes) prend l'entete competence (ici 2 colonnes) -->
+              </div>
+              <div class="col-xl-3">
+                <th style="text-align:center"> Taches </th>
+              </div>
+              <div class="col-xl-3">
+                <th colspan="3" style="text-align:center"> Actions Tache</th>
+              </div>
+              <div class="col-xl-3">
+                <th colspan="2" style="text-align:center"> Action Competence</th>
+              </div>
+            </tr>
+          </thead>
+
+
+        {% for competence in competences %}
+        <tr>
+          <td id="code" align="center">{{ competence.Code }}</td>
+          <td align="center">{{ competence.libelle }}</td>
+          <td id="titreTache">
+             {% for tache in competence.taches %} 
+                {% if tache.user.id == user.id %} 
+                      <a id="titreTache" href='{{ path }}?c=tache&t=showTache&tacheID={{ tache.id }}'>{{ tache.titre }}</a>
+                    </div>    
+                {% endif %}
+             {% endfor %}
+          </td>
+
+          <td id="deleteTache"> {# CONDITIONS POUR L'AFFICHAGE DU BOUTTON SUPPRIMER #}
+            {% if competence.taches | length > 0 %}  
+              {% for tache in competence.taches %}
+                {% if tache in user.taches %}  
+                  <div id="deleteTacheButton" align="center">
+                    <a href=# data-tache-id='{{ tache.id }}' class="deletelink1 btn btn-danger stretched-link test1"><i class="fas fa-trash-alt"></i></a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </td>
+        
+          <td id="editTache"> {# CONDITIONS POUR L'AFFICHAGE DU BOUTTON EDITER #}
+                {% if competence.taches | length > 0 %} 
+                  {% for tache in competence.taches %} 
+                    {% if tache.user.id == user.id %} 
+                      <div id="editTacheButton" align="center">
+                        <a align="center"><a href='{{ path }}?c=tache&t=edit&tacheId={{ tache.id }}&competenceId={{ competence.id }}' class="editTache1 btn btn-secondary stretched-link"><i class="fas fa-edit"></i></a>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+          </td>  
+                        
+          <td align="center" id="newTache">
+              <a href='{{ path }}?c=tache&t=new&competenceId={{ competence.id }}' class="btn btn-secondary stretched-link"><i class="fas fa-plus-circle"></i></a>
+          </td>
+          <td align="center">
+            <a href='{{ path }}?c=competence&t=edit&competenceId={{ competence.id }}' class="btn btn-secondary stretched-link"><i class="fas fa-edit"></i></a>
+            <a href='{{ path }}?c=competence&t=delete&competenceID={{ tache.id }}' class="deletelink3 btn btn-danger stretched-link" data-competence-id='{{ competence.id }}'><i class="fas fa-trash-alt"></i>
+          </td>
+
+    </tr>
+    {% endfor %}
+         </div>
+      </table>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+  <script>
+    
+//     FAIRE SCRIPT SI div edit tache contient edittache1 alors supprimer les div edittache2
+    
+//     const editContainer = $("#editTache");
+//     if(editContainer)
+    
+    
+    
+    $(".deletelink1").click(function(event) {
+      event.preventDefault();
+      if (confirm('VOULEZ-VOUS VRAIMENT SUPPRIMER CETTE TACHE ?')) {
+        const tacheID = $(this).data('tache-id'); // on "cible" ici l'intutilé du data passé, c'est a dire "tache-id" et non l'intérieur des parenthéses qui contient "tache.id"
+        
+        $.ajax({
+          url: "{{ path }}?c=tache&t=delete&tacheID=" + tacheID,
+          type: "GET",
+          success: function() {
+            console.log('success');
+            document.location.reload();
+          },
+        });
+      }
+    })
+
+
+    $(".deletelink2").click(function(event) {
+      event.preventDefault();
+      
+          alert('AUCUNE TACHE A SUPPRIMER')
+          console.log('success');
+      });
+    
+    $(".editTache2").click(function(event) {
+      event.preventDefault();
+      
+          alert('AUCUNE TACHE A MODIFIER')
+          console.log('success');
+      });
+    
+    
+    $(".deletelink3").click(function(event) {
+      event.preventDefault();
+      if (confirm('VOULEZ-VOUS VRAIMENT SUPPRIMER CETTE COMPETENCE ? (en supprimant la competence vous supprimez également toutes les taches rattachées a cette derniere).')) {
+        const competenceID = $(this).data('competence-id'); 
+        
+        $.ajax({
+          url: "{{ path }}?c=competence&t=delete&competenceID=" + competenceID,
+          type: "GET",
+          success: function() {
+            console.log('success');
+            document.location.reload();
+          },
+          error: function() {
+            console.log('error');
+          },
+        });
+      }
+    })
+
+
+    $("#deconnexionButton").click(function() {
+
+      $.ajax({
+        url: "{{ path }}?c=user&t=disconnect",
+        type: "POST",
+        success: function() {
+          console.log('success');
+          document.location.reload();
+        },
+        error : function(){
+          console.log('error');
+        },
+      });
+    })
+  </script>
+</body>
+
+</html>

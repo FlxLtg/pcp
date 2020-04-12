@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      
+        <title>La tache</title>
+        <link href='showTache.css' type='text/css' rel='stylesheet' />
+    </head>
+    
+    <body>
+     <div class = "container-fluid">
+      <div class = "row">
+       <div class = "titre col-10 offset-1 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+         <br>
+         <h1>{{ tache.titre }}</h1>
+        </div>
+       </div>
+       <br>
+       <br>
+      <div class = "row">
+       <div class = "description col-10 offset-1 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+         <p>
+          {{ tache.description }}
+         </p>
+       </div>
+      </div>
+      <div class = "row">
+       <div class = "date col-10 offset-1 col-sm-8 offset-sm-2 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+         <br>
+        <p>
+          Tache réalisée le : {{ tache.date|date('d/m/Y') }}
+        </p>
+       </div>
+      </div>
+     </div>
+    </body>
+</html>
