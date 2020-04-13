@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://kit.fontawesome.com/1804e69ab6.js" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href='profil.css' type='text/css' rel='stylesheet' />
+        <title>Profil</title>
+
+    </head>
+  
+    <body>
+       <br>
+       <h1 style="text-align:center">Profil</h1>
+       <br>
+       <br>
+       <br>
+       <br>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-6 offset-md-3">
+          <label for="basic-url">Lien GitHub :</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="githubPreLink">https://github.com/</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Profil GitHub" id="githubLink" aria-describedby="githubButton" value="{{ user.github }}">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="githubButton">Editer</button>
+              </div>
+            </div>
+          </div>
+            
+        </div>
+      </div>
+      
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+      <script>
+        
+        $("#githubButton").click(function() {
+          const githubLink = $('#githubLink').val();
+          var data = JSON.stringify({
+            githubLink: githubLink,
+          });
+          
+        $.ajax({
+            url: "{{ path }}?c=user&t=githubAdd",
+            type: "POST",
+            data: data,
+            contentType: "application/json",
+            success: function (response) {
+            console.log('success');
+            },
+            error: function (jqXHR) {
+              console.log('error');
+            }
+        });   
+      });
+        
+      </script>
+    </body>
+</html>

@@ -197,7 +197,35 @@ class UserController extends Controller
       $_SESSION = array();
       session_destroy();
       http_response_code(200);
-    }  
+    } 
+  
+  public function profil($request) 
+  {
+    $user = $request->getUser();
+    $competences = $request->getEm()->getRepository('Entity\Competence')->findAll();
+    $taches = $user->getTaches();
+    $tache = $request->getEm()->getRepository('Entity\Tache');
+    
+    echo $this->twig->render('profil.html', [
+      'user' => $user,
+      'competences' => $competences,
+      'tachesUser' => $taches,
+    ]);
+  }
+  
+  public function githubAdd($request)
+  {
+  $user = $request->getUser();
+  $content_raw = file_get_contents("php://input"); // ON RECUPERE LES DONNEES DES INPUTS 
+  $decoded_data = json_decode($content_raw, true);
+  $githubLink = $decoded_data['githubLink'];
+  
+  $user->setGithub($githubLink);
+  $request->getEm()->persist($user);
+  $request->getEm()->flush();
+  }
+  
+  
 }  
  
     

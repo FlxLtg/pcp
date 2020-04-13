@@ -16,14 +16,11 @@ class CompetenceController extends Controller
   public function list($request)
   { 
       $competences = $request->getEm()->getRepository('Entity\Competence')->findAll();
-      $allTaches = $request->getEm()->getRepository('Entity\Tache')->findAll();
       $user = $request->getUser();
-      $userTaches = $user->getTaches();
   
       echo $this->twig->render('listCompetence.html',
         [
           "competences" => $competences,
-          "userTaches" => $userTaches,
           "user" => $user,
         ]
       );

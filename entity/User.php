@@ -51,7 +51,14 @@ class User
     * @ORM\Column(type="string") 
     */
     protected $role;
-    
+  
+  
+  /** 
+    * @ORM\Column(type="string") 
+    */
+    protected $github;
+  
+  
   /**
     * One user has many taches. This is the inverse side.
     * @ORM\OneToMany(targetEntity="Tache", mappedBy="user")
@@ -195,6 +202,30 @@ class User
     public function getRole()
     {
         return $this->role;
+    }
+  
+      /**
+     * Set github.
+     *
+     * @param string $github
+     *
+     * @return User
+     */
+    public function setGithub($github)
+    {
+        $this->github = $github;
+
+        return $this;
+    }
+
+    /**
+     * Get github.
+     *
+     * @return string
+     */
+    public function getGithub()
+    {
+        return $this->github;
     }
   
      /**

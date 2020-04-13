@@ -24,8 +24,14 @@
       
     <div class=container-fluid>
      <div class="d-sm-flex flex-row"><!-- flex = se mettre a la suite -->
-      <div class="mr-auto p-2" id="addCompetenceCss">
+      <div class="p-2" id="addCompetenceCss">
         <a href="{{ path }}?c=competence&t=new" class="btn btn-secondary stretched-link add-flex"> AJOUTER UNE COMPETENCE </a>
+      </div>
+      <div class="mr-auto p-2" id="githubButton">
+        <a href="{{ path }}?c=user&t=profil" class="btn btn-secondary stretched-link add-flex">Profil</a>
+      </div>
+      <div class="p-2" id="githubButton">
+        <a href="{{'https://github.com/' ~ user.github}}" class="btn btn-secondary stretched-link add-flex">Profil Github</a>
       </div>
 
       <div class="d-flex flex-row">
@@ -60,7 +66,7 @@
                 <th colspan="3" style="text-align:center"> Actions Tache</th>
               </div>
               <div class="col-xl-3">
-                <th colspan="2" style="text-align:center"> Action Competence</th>
+                <th colspan="2" style="text-align:center"> Actions Competence</th>
               </div>
             </tr>
           </thead>
@@ -74,7 +80,6 @@
              {% for tache in competence.taches %} 
                 {% if tache.user.id == user.id %} 
                       <a id="titreTache" href='{{ path }}?c=tache&t=showTache&tacheID={{ tache.id }}'>{{ tache.titre }}</a>
-                    </div>    
                 {% endif %}
              {% endfor %}
           </td>
