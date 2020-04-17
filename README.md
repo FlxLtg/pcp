@@ -1,6 +1,8 @@
 # pcp
 Portefeuille de compétences - Projet BTS SIO SLAM
 
+Documentation utilisateur : http://195.154.118.169/felix/projetPCPbis/docPCP/build/html
+
 SOON
 
 - ameliorations des options du profil
