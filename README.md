@@ -3,6 +3,10 @@ Portefeuille de compétences - Projet BTS SIO SLAM
 
 Url du projet : http://195.154.118.169/felix/tpmvc/
 
+Compte utilisateur : 
+id = test
+pw = test
+
 Documentation utilisateur : http://195.154.118.169/felix/tpmvc/docPCP/build/html
 
 SOON
