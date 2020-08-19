@@ -3,6 +3,8 @@ Portefeuille de compétences - Projet BTS SIO SLAM
 
 Url du projet : http://195.154.118.169/felix/tpmvc/
 
+Url pour se connecter a la base de données : http://195.154.118.169/phpmyadmin/index.php
+
 Compte utilisateur : 
 id = test
 pw = test
